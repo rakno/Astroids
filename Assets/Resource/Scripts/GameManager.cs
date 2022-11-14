@@ -12,8 +12,12 @@ public class GameManager : MonoBehaviour
     private int HighScore;
     private int astroRemainingCount;
     private int LifeLine;
-    private int Level_No=1;
+    private int Level_No;
     private int IncreasingAstroCountBy = 3;
+
+    public AudioSource winSound;
+    public AudioSource loseSound;
+    public AudioSource RocketBlast;
 
     public Text ScoreText;
     public Text LivesText;
@@ -29,24 +33,24 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+      
     }
 
-    void StartGame()
+    public void StartGame()
     {
         LiveScore = 0;
         LifeLine = 3;
         Level_No = 1;
 
+        ScoreText.text= "SCORE: "+ LiveScore;
+        HighScoreText.text= "HIGH SCORE: "+ HighScore ;
+        LivesText.text= "LIVES: "+ LifeLine;
+        LevelText.text = "LEVEL: " + Level_No;
         CreateAstro();
-        //ScoreText.text= "SCORE: "+ LiveScore;
-        //HighScoreText.text= "HIGH SCORE: "+ HighScore ;
-        //LivesText.text= "LIVES: "+ LifeLine;
-        //LevelText.text = "LEVEL: " + Level_No;
     }
 
 
-    void CreateAstro()
+    public void CreateAstro()
     {
         DestroyAstro();
         astroRemainingCount = Level_No * IncreasingAstroCountBy;
@@ -59,9 +63,9 @@ public class GameManager : MonoBehaviour
             
         }
 
-
+        LevelText.text = "LEVEL: " + Level_No;
     }
-    void DestroyAstro()
+    public void DestroyAstro()
     {
         GameObject[] LargeAstroids = GameObject.FindGameObjectsWithTag("LargeAstro");
 
@@ -77,6 +81,48 @@ public class GameManager : MonoBehaviour
             GameObject.Destroy(astroSmall);
         }
 
+    }
+
+    public void ScoreIncrease()
+    {
+        LiveScore++;
+        ScoreText.text = "SCORE:" + LiveScore;
+        if(LiveScore>HighScore)
+        {
+            HighScore = LiveScore;
+            HighScoreText.text = "HIGH SCORE: " + HighScore;
+        }
+        if (astroRemainingCount < 1)
+        {
+            LifeLine++;
+            Level_No++;
+           // winSound.Play();
+            CreateAstro();
+        }
+
+    }
+
+    public void LifeLoss()
+    {
+        RocketBlast.Play();
+        LifeLine--;
+        LivesText.text = "LIVES: " + LifeLine;
+
+        if(LifeLine<1)
+        {
+           // loseSound.Play();
+            StartGame();
+        }
+    }
+
+    public void DestroyingNumberofAstro()
+    {
+        astroRemainingCount--;
+    }
+
+    public void SplitingAstro()
+    {
+        astroRemainingCount = astroRemainingCount + 2;
     }
 
 

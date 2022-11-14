@@ -4,16 +4,61 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    Rigidbody2D rb;
+    public GameObject smallAstro;
+     AudioSource AstroBlast;
+  
+     GameManager gm;
+    public float speed = 5;
+    public LayerMask lm;
+    
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+     
+        
+        GameObject go = GameObject.FindWithTag("GameManager");
+        gm = go.GetComponent<GameManager>();
+       
+        GameObject.Destroy(gameObject, 4f);
+        
 
-        GameObject.Destroy(gameObject, 3f);
 
-        rb.AddForce(transform.up);
     }
 
-   
+    void Update()
+    {
+        transform.position = transform.position + speed * transform.up * Time.deltaTime;
+        RaycastHit2D rch = Physics2D.Raycast(transform.position, transform.up, speed * Time.deltaTime);
+        if (rch.collider != null)
+        {
+            bool ifLarge = rch.collider.gameObject.CompareTag("LargeAstro");
+            bool ifSmall = rch.collider.gameObject.CompareTag("SmallAstro");
+            if (ifLarge)
+            {
+                //playastroBlast
+               // AstroBlast.Play();
+                GameObject.Destroy(gameObject);
+                GameObject.Destroy(rch.collider.gameObject);
+                Instantiate(smallAstro, new Vector3(transform.position.x - 0.5f, transform.position.y - 0.5f, 0), Quaternion.Euler(0, 0, 75));
+             
+                Instantiate(smallAstro, new Vector3(transform.position.x + 0.5f, transform.position.y - 0.5f, 0), Quaternion.Euler(0, 0, 295));
+                gm.ScoreIncrease();
+                gm.SplitingAstro();
+                
+            }
+            if (ifSmall)
+            {
+                //playAstroBlast
+              //  AstroBlast.Play();
+                GameObject.Destroy(gameObject);
+                GameObject.Destroy(rch.collider.gameObject);
+                gm.DestroyingNumberofAstro();
+                gm.ScoreIncrease();
+            }
+
+
+        }
+    }
+
+
 }

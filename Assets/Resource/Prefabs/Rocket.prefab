@@ -174,3 +174,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 4287833141291731769, guid: 86d3182adbe2eac429db4c072d3b9747, type: 3}
+  smallAstro: {fileID: 6998511587241373934, guid: b88d9963533f23f459f922bf9db9b8e4, type: 3}
+  speed: 5
+  lm:
+    serializedVersion: 2
+    m_Bits: 0

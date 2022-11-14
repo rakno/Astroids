@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     public AudioSource winSound;
     public AudioSource loseSound;
-    public AudioSource RocketBlast;
+    AudioSource RocketBlast;
 
     public Text ScoreText;
     public Text LivesText;
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartGame();
-        
+        RocketBlast= gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

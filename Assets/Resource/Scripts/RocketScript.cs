@@ -10,7 +10,7 @@ public class RocketScript : MonoBehaviour
     float rocketTorque = 1f;
     public GameObject bullet;
     GameManager gameM;
-    public AudioSource shootingSound;
+    AudioSource shootingSound;
     Rigidbody2D rb;
     float cd_max = 0.5f;
     float cd_counter;
@@ -18,6 +18,7 @@ public class RocketScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        shootingSound = gameObject.GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         GameObject go = GameObject.FindWithTag("GameManager");
         gameM = go.GetComponent<GameManager>();
@@ -73,7 +74,7 @@ public class RocketScript : MonoBehaviour
     }
     public void Shooting()
     {
-       // shootingSound.Play();
+        shootingSound.Play();
         Instantiate(bullet, new Vector3(transform.position.x, transform.position.y, 0),transform.rotation);
        
     }

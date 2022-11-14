@@ -20,7 +20,8 @@ public class BulletScript : MonoBehaviour
         gm = go.GetComponent<GameManager>();
        
         GameObject.Destroy(gameObject, 4f);
-        
+
+        AstroBlast = gameObject.GetComponent<AudioSource>();
 
 
     }
@@ -36,9 +37,9 @@ public class BulletScript : MonoBehaviour
             if (ifLarge)
             {
                 //playastroBlast
-               // AstroBlast.Play();
                 GameObject.Destroy(gameObject);
                 GameObject.Destroy(rch.collider.gameObject);
+                AstroBlast.Play();
                 Instantiate(smallAstro, new Vector3(transform.position.x - 0.5f, transform.position.y - 0.5f, 0), Quaternion.Euler(0, 0, 75));
              
                 Instantiate(smallAstro, new Vector3(transform.position.x + 0.5f, transform.position.y - 0.5f, 0), Quaternion.Euler(0, 0, 295));
@@ -49,9 +50,9 @@ public class BulletScript : MonoBehaviour
             if (ifSmall)
             {
                 //playAstroBlast
-              //  AstroBlast.Play();
                 GameObject.Destroy(gameObject);
                 GameObject.Destroy(rch.collider.gameObject);
+                 AstroBlast.Play();
                 gm.DestroyingNumberofAstro();
                 gm.ScoreIncrease();
             }

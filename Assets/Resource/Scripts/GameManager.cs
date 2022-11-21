@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     public AudioSource winSound;
     public AudioSource loseSound;
-    AudioSource RocketBlast;
+    public AudioSource RocketBlast;
 
     public Text ScoreText;
     public Text LivesText;
@@ -26,8 +26,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         StartGame();
-        RocketBlast= gameObject.GetComponent<AudioSource>();
+       
     }
 
     // Update is called once per frame
@@ -94,9 +95,11 @@ public class GameManager : MonoBehaviour
         }
         if (astroRemainingCount < 1)
         {
+            Debug.Log(astroRemainingCount);
+
             LifeLine++;
             Level_No++;
-           // winSound.Play();
+           winSound.Play();
             CreateAstro();
         }
 
@@ -110,7 +113,7 @@ public class GameManager : MonoBehaviour
 
         if(LifeLine<1)
         {
-           // loseSound.Play();
+            loseSound.Play();
             StartGame();
         }
     }
@@ -122,6 +125,7 @@ public class GameManager : MonoBehaviour
 
     public void SplitingAstro()
     {
+        DestroyingNumberofAstro();
         astroRemainingCount = astroRemainingCount + 2;
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     public GameObject smallAstro;
-     AudioSource AstroBlast;
+    public AudioSource AstroBlast;
   
      GameManager gm;
     public float speed = 5;

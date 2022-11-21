@@ -21,7 +21,8 @@ public class WrappingScript : MonoBehaviour
 
         else if(transform.position.y >= 12.5)
         {
-            transform.position = new Vector3(transform.position.x,0.5f, 0);
+
+           transform.position = new Vector3(transform.position.x,0.5f, 0);
         }
 
         else if(transform.position.y<=0.5)

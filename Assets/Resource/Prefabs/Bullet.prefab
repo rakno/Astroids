@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smallAstro: {fileID: 6998511587241373934, guid: b88d9963533f23f459f922bf9db9b8e4, type: 3}
+  AstroBlast: {fileID: 2639778995911262812}
   speed: 5
   lm:
     serializedVersion: 2
